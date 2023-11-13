@@ -1,14 +1,17 @@
 {
   "name": "next-rails-scaffold",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "Enhance your Next.js development workflow with this powerful Hygen package tailored for seamless integration into the versatile  https://github.com/raphox/next-rails ecosystem.",
+  "keywords": [
+    "hygen",
+    "generator",
+    "boilerplate",
+    "scaffold",
+    "react",
+    "next",
+    "rails"
+  ],
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "hygen": "^6.2.11"
-  }
+  "author": "Raphael A. Araújo <raphox.araujo@gmail.com>",
+  "license": "MIT"
 }

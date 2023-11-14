@@ -1,5 +1,5 @@
 ---
-to: src/pages/_app.tsx
+to: src/pages/_app.js
 ---
 import "@/styles/globals.css";
 
@@ -22,7 +22,6 @@ export default function App({ Component, pageProps }) {
   return (
     <QueryClientProvider client={queryClient}>
       <Component {...pageProps} />
-      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }

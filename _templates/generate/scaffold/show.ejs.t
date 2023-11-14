@@ -8,7 +8,7 @@ import { useMutation } from 'react-query';
 import { useQuery } from "react-query";
 
 import { api } from "@/services";
-import <%= class_name %> from "../_components/<%= class_name %>";
+import <%= class_name %> from "../../_components/<%= class_name %>";
 
 export default function <%= class_name %>ShowPage() {
   const router = useRouter();

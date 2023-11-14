@@ -7,7 +7,7 @@ import { useParams } from "next/navigation";
 import { useQuery, useMutation } from 'react-query';
 
 import { api } from "@/services";
-import <%= class_name %>Form from "../_components/<%= class_name %>Form";
+import <%= class_name %>Form from "../../_components/<%= class_name %>Form";
 
 export default function <%= class_name %>EditPage() {
   const params = useParams();

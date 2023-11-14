@@ -3,7 +3,7 @@ to: src/pages/<%= h.inflection.tableize(name) %>/index.js
 ---
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import { api } from "@/services";
 import <%= class_name %> from "./_components/<%= class_name %>";

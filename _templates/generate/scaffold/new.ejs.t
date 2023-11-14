@@ -3,7 +3,7 @@ to: src/pages/<%= h.inflection.tableize(name) %>/new.js
 ---
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useMutation } from 'react-query';
+import { useMutation } from "@tanstack/react-query";
 
 import { api } from "@/services";
 import <%= class_name %>Form from "./_components/<%= class_name %>Form";

@@ -4,10 +4,10 @@ to: src/pages/<%= h.inflection.tableize(name) %>/[id]/edit.js
 import { useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useQuery, useMutation } from 'react-query';
+import { useQuery, useMutation } from "@tanstack/react-query";
 
 import { api } from "@/services";
-import <%= class_name %>Form from "../../_components/<%= class_name %>Form";
+import <%= class_name %>Form from "../_components/<%= class_name %>Form";
 
 export default function <%= class_name %>EditPage() {
   const params = useParams();

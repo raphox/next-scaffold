@@ -17,18 +17,20 @@ export default function <%= class_name %>ShowPage() {
   const <%= singular_table_name %>Id = params?.id;
 
   const {
-    isIdle,
-    isLoading,
+    isPending,
     error,
     data: <%= singular_table_name %>,
-  } = useQuery(
-    ["<%= plural_table_name %>", <%= singular_table_name %>Id],
-    () => api.get(`/<%= plural_table_name %>/${params.id}`).then((res) => res.data),
-    { enabled: !!<%= singular_table_name %>Id, refetchOnMount: true }
-  );
+  } = useQuery({
+    queryKey: ["<%= plural_table_name %>", <%= singular_table_name %>Id],
+    queryFn: () => api.get(`/<%= plural_table_name %>/${params.id}`).then((res) => res.data),
+    enabled: !!<%= singular_table_name %>Id,
+    refetchOnMount: true,
+  });
 
-  const { isLoading: isDeleting, mutate } = useMutation((id) => {
-    return api.delete(`/<%= plural_table_name %>/${id}`);
+  const { isPending: isDeleting, mutate } = useMutation({
+    mutationFn: (id) => {
+      return api.delete(`/<%= plural_table_name %>/${id}`);
+    },
   });
 
   const handleDelete = () => {
@@ -45,7 +47,7 @@ export default function <%= class_name %>ShowPage() {
     });
   };
 
-  if (isIdle || isLoading) return "Loading...";
+  if (isPending) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
 

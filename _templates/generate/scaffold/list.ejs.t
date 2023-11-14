@@ -12,14 +12,15 @@ export default function <%= class_name %>Page() {
   const searchParams = useSearchParams();
   const notice = searchParams.get("notice");
   const {
-    isLoading,
+    isPending,
     error,
     data: <%= plural_table_name %>,
-  } = useQuery("<%= plural_table_name %>", () =>
-    api.get("/<%= plural_table_name %>").then((res) => res.data)
-  );
+  } = useQuery({
+    queryKey: ["<%= plural_table_name %>"],
+    queryFn: () => api.get("/<%= plural_table_name %>").then((res) => res.data),
+  });
 
-  if (isLoading) return "Loading...";
+  if (isPending) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
 

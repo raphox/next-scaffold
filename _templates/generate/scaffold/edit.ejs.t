@@ -15,18 +15,20 @@ export default function <%= class_name %>EditPage() {
   const <%= singular_table_name %>Id = params?.id;
 
   const {
-    isIdle,
-    isLoading,
+    isPending,
     error,
     data: <%= singular_table_name %>,
-  } = useQuery(
-    ["<%= plural_table_name %>", <%= singular_table_name %>Id],
-    () => api.get(`/<%= plural_table_name %>/${<%= singular_table_name %>Id}`).then((res) => res.data),
-    { enabled: !!<%= singular_table_name %>Id, refetchOnMount: true }
-  );
+  } = useQuery({
+    queryKey: ["<%= plural_table_name %>", <%= singular_table_name %>Id],
+    queryFn: () => api.get(`/<%= plural_table_name %>/${params.id}`).then((res) => res.data),
+    enabled: !!<%= singular_table_name %>Id,
+    refetchOnMount: true
+  });
 
-  const { isLoading: isUpdating, mutate } = useMutation((data) => {
-    return api.put(`/<%= plural_table_name %>/${<%= singular_table_name %>Id}`, data);
+  const { isPending: isUpdating, mutate } = useMutation({
+    mutationFn: (data) => {
+      return api.put(`/<%= plural_table_name %>/${<%= singular_table_name %>Id}`, data);
+    },
   });
 
   const handleUpdate = (data) => {
@@ -40,7 +42,7 @@ export default function <%= class_name %>EditPage() {
     });
   };
 
-  if (isIdle || isLoading) return "Loading...";
+  if (isPending) return "Loading...";
 
   if (error) return "An error has occurred: " + error.message;
 

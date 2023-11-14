@@ -10,8 +10,10 @@ import <%= class_name %>Form from "./_components/<%= class_name %>Form";
 
 export default function <%= class_name %>NewPage() {
   const router = useRouter();
-  const { isLoading: isCreating, mutate } = useMutation((data) => {
-    return api.post("/<%= plural_table_name %>", data);
+  const { isPending: isCreating, mutate } = useMutation({
+    mutationFn: (data) => {
+      return api.post("/<%= plural_table_name %>", data);
+    },
   });
 
   const handleCreate = (data) => {

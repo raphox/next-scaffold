@@ -1,5 +1,5 @@
 ---
-to: src/pages/<%= h.inflection.tableize(name) %>/_components/<%= h.changeCase.pascal(name) %>Form.js
+to: src/pages/<%= h.inflection.tableize(name) %>/_components/<%= class_name %>Form.js
 ---
 <%
 const ZOD_TYPE_MAP = {

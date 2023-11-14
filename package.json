@@ -1,6 +1,6 @@
 {
   "name": "hygen-next-rails-scaffold",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Enhance your Next.js development workflow with this powerful Hygen package tailored for seamless integration into the versatile  https://github.com/raphox/next-rails ecosystem.",
   "keywords": [
     "hygen",
@@ -13,5 +13,10 @@
   ],
   "main": "index.js",
   "author": "Raphael A. Araújo <raphox.araujo@gmail.com>",
+  "homepage": "https://github.com/raphox/next-rails-scaffold#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/raphox/next-rails-scaffold"
+  },
   "license": "MIT"
 }

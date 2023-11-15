@@ -3,13 +3,14 @@ to: src/pages/<%= h.inflection.tableize(name) %>/new.js
 ---
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { api } from "@/services";
 import <%= class_name %>Form from "./_components/<%= class_name %>Form";
 
 export default function <%= class_name %>NewPage() {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const { isPending: isCreating, mutate } = useMutation({
     mutationFn: (data) => {
       return api.post("/<%= plural_table_name %>", data);

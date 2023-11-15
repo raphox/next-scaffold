@@ -1,8 +1,6 @@
 ---
 to: src/pages/_app.js
 ---
-import "@/styles/globals.css";
-
 import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 

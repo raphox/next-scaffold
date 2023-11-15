@@ -36,6 +36,7 @@ export default function <%= class_name %>ShowPage() {
   const handleDelete = () => {
     mutate(params.id, {
       onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["<%= plural_table_name %>"] });
         router.replace({
           pathname: "/<%= plural_table_name %>",
           query: { notice: "Removed with success." },

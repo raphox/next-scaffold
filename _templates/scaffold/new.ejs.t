@@ -19,6 +19,7 @@ export default function <%= class_name %>NewPage() {
   const handleCreate = (data) => {
     mutate(data, {
       onSuccess: ({ data: <%= singular_table_name %> }) => {
+        queryClient.invalidateQueries({ queryKey: ["<%= plural_table_name %>"] });
         router.replace({
           pathname: `/<%= plural_table_name %>/${<%= singular_table_name %>.id}`,
           query: { notice: "Created with success." },

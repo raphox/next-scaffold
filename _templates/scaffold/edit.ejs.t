@@ -22,7 +22,7 @@ export default function <%= class_name %>EditPage() {
     queryKey: ["<%= plural_table_name %>", <%= singular_table_name %>Id],
     queryFn: () => api.get(`/<%= plural_table_name %>/${params.id}`).then((res) => res.data),
     enabled: !!<%= singular_table_name %>Id,
-    refetchOnMount: true
+    refetchOnMount: true,
   });
 
   const { isPending: isUpdating, mutate } = useMutation({
@@ -34,6 +34,7 @@ export default function <%= class_name %>EditPage() {
   const handleUpdate = (data) => {
     mutate(data, {
       onSuccess: (result) => {
+        queryClient.invalidateQueries({ queryKey: ["<%= plural_table_name %>"] });
         setNotice("Updated with success.");
       },
       onError: (error) => {

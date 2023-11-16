@@ -23,7 +23,6 @@ export default function <%= class_name %>EditPage() {
     queryKey: ["<%= plural_table_name %>", <%= singular_table_name %>Id],
     queryFn: () => api.get(`/<%= plural_table_name %>/${params.id}`).then((res) => res.data),
     enabled: !!<%= singular_table_name %>Id,
-    refetchOnMount: true,
   });
 
   const { isPending: isUpdating, mutate } = useMutation({

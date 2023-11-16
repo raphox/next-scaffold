@@ -10,7 +10,6 @@ export default function App({ Component, pageProps }) {
       new QueryClient({
         defaultOptions: {
           queries: {
-            refetchOnMount: false,
             refetchOnWindowFocus: false,
           },
         },

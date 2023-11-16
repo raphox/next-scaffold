@@ -33,7 +33,7 @@ _templates/generate/scaffold/
 
 ```
 npm install
-npx hygen generate scaffold post title:string body:text
+npx hygen generator scaffold post title:string body:text
 ```
 
 ### Result

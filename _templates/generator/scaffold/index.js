@@ -16,6 +16,7 @@ module.exports = {
     singular_table_name = h.inflection.singularize(plural_table_name);
 
     return {
+      npm_package_version: process.env.npm_package_version,
       human_name,
       class_name,
       plural_table_name,

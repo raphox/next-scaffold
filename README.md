@@ -59,3 +59,5 @@ src
 |       └── new.js
 └── services.js
 ```
+
+Sample app https://github.com/raphox/next-rails-app.

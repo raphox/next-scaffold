@@ -6,7 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 
 import { api } from "@/services";
-import <%= class_name %> from "./_components/<%= class_name %>";
+import <%= class_name %> from "@/components/<%= class_name %>";
 
 export default function <%= class_name %>Page() {
   const searchParams = useSearchParams();

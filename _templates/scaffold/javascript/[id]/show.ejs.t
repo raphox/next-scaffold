@@ -2,12 +2,11 @@
 to: src/pages/<%= h.inflection.tableize(name) %>/[id]/index.js
 ---
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useParams, useSearchParams } from "next/navigation";
+import { useRouter, useParams, useSearchParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { api } from "@/services";
-import <%= class_name %> from "../_components/<%= class_name %>";
+import <%= class_name %> from "@/components/<%= class_name %>";
 
 export default function <%= class_name %>ShowPage() {
   const router = useRouter();

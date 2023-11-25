@@ -1,5 +1,5 @@
 ---
-to: src/pages/<%= h.inflection.tableize(name) %>/_components/<%= class_name %>.js
+to: src/components/<%= class_name %>.js
 ---
 export default function <%= class_name %>(props) {
   return (

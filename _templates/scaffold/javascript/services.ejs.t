@@ -1,9 +1,6 @@
 ---
 to: src/services.js
 ---
-<%
-  class_name = h.inflection.classify(name)
--%>
 import axios from "axios";
 
 const api = axios.create({

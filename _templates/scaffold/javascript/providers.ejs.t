@@ -1,11 +1,12 @@
 ---
-to: src/pages/_app.js
+to: src/providers.js
 ---
-import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import React from "react";
 
-export default function App({ Component, pageProps }) {
-  const [queryClient] = useState(
+export function Providers({ children }) {
+  const [queryClient] = React.useState(
     () =>
       new QueryClient({
         defaultOptions: {
@@ -18,7 +19,8 @@ export default function App({ Component, pageProps }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Component {...pageProps} />
+      {children}
+      {<ReactQueryDevtools initialIsOpen={false} />}
     </QueryClientProvider>
   );
 }

@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { api } from "@/services";
-import <%= class_name %>Form from "./_components/<%= class_name %>Form";
+import <%= class_name %>Form from "@/components/<%= class_name %>Form";
 
 export default function <%= class_name %>NewPage() {
   const router = useRouter();

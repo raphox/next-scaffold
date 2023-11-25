@@ -3,15 +3,21 @@
 ## Templates
 
 ```
-_templates/generate/scaffold/
-├── _component.ejs.t
-├── _form.ejs.t
-├── edit.ejs.t
-├── index.js
-├── list.ejs.t
-├── new.ejs.t
-├── services.ejs.t
-└── show.ejs.t
+_templates/scaffold/
+└── javascript
+    ├── [id]
+    |   ├── edit.ejs.t
+    |   └── show.ejs.t
+    ├── components
+    |   ├── resource.ejs.t
+    |   └── resource_form.ejs.t
+    ├── home.js
+    ├── index.js
+    ├── list.ejs.t
+    ├── new.ejs.t
+    └── services.ejs.t
+├── typescript (TODO)
+└── shadcn-ui (TODO)
 ```
 
 ## Frontend tech stack:
@@ -42,14 +48,14 @@ Generated files strutucture:
 
 ```
 src
+├── components
+|   ├── Post.js
+|   └── PostForm.js
 ├── pages
 |   └── posts
 |       ├── [id]
 |       |   ├── edit.js
 |       |   └── index.js
-|       ├── _components
-|       |   ├── Post.js
-|       |   └── PostForm.js
 |       ├── index.js
 |       └── new.js
 └── services.js

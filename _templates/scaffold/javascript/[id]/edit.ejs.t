@@ -1,70 +1,64 @@
 ---
 to: src/pages/<%= h.inflection.tableize(name) %>/[id]/edit.js
 ---
-import { useState } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { api } from "@/services";
-import <%= class_name %>Form from "@/components/<%= class_name %>Form";
+import { FormProvider } from "@/providers";
+import <%= class_name %>Form, { resolver } from "@/components/<%= class_name %>Form";
 
 export default function <%= class_name %>EditPage() {
   const params = useParams();
-  const [notice, setNotice] = useState();
   const queryClient = useQueryClient();
   const <%= singular_table_name %>Id = params?.id;
 
   const {
-    isPending,
-    error,
-    data: <%= singular_table_name %>,
-  } = useQuery({
-    queryKey: ["<%= plural_table_name %>", <%= singular_table_name %>Id],
-    queryFn: () => api.get(`/<%= plural_table_name %>/${params.id}`).then((res) => res.data),
-    enabled: !!<%= singular_table_name %>Id,
-  });
-
-  const { isPending: isUpdating, mutate } = useMutation({
-    mutationFn: (data) => {
-      return api.put(`/<%= plural_table_name %>/${<%= singular_table_name %>Id}`, data);
+    isPending: isUpdating,
+    isSuccess,
+    mutateAsync,
+  } = useMutation({
+    mutationFn: (data) => api.put(`/<%= plural_table_name %>/${<%= singular_table_name %>Id}`, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["<%= plural_table_name %>"] });
     },
   });
 
-  const handleUpdate = (data) => {
-    mutate(data, {
-      onSuccess: (result) => {
-        queryClient.invalidateQueries({ queryKey: ["<%= plural_table_name %>"] });
-        setNotice("Updated with success.");
-      },
-      onError: (error) => {
-        alert(`Error: ${JSON.stringify(error)}`);
-      },
-    });
-  };
+  const { isPending, error, data } = useQuery({
+    queryFn: () => api.get(`/<%= plural_table_name %>/${<%= singular_table_name %>Id}`).then((res) => res.data),
+    queryKey: ["<%= plural_table_name %>", <%= singular_table_name %>Id],
+    enabled: !!<%= singular_table_name %>Id,
+  });
 
-  if (isPending) return "Loading...";
-
-  if (error) return "An error has occurred: " + error.message;
+  if (isPending) {
+    return "Loading...";
+  } else if (error) {
+    return "An error has occurred: " + error.message;
+  }
 
   return (
     <>
-      {notice && <p style={{ color: "green" }}>{notice}</p>}
+      {isSuccess && <p style={{ color: "green" }}>Updated with success.</p>}
 
-      <h1>Editing <%= h.changeCase.lower(human_name) %></h1>
+      <h1>Editing <%= singular_table_name %></h1>
 
-      <<%= class_name %>Form
-        isLoading={isUpdating}
-        data={<%= singular_table_name %>}
-        onSubmit={handleUpdate}
-      />
+      <FormProvider resolver={resolver} values={data} onSubmit={mutateAsync}>
+        <<%= class_name %>Form />
+
+        <div>
+          <button disabled={isUpdating} type="submit">
+            Update
+          </button>
+        </div>
+      </FormProvider>
 
       <br />
 
       <div>
-        <Link href={`/<%= plural_table_name %>/${<%= singular_table_name %>.id}`}>Show this <%= h.changeCase.lower(human_name) %></Link>
+        <Link href={`/<%= plural_table_name %>/${<%= singular_table_name %>Id}`}>Show this <%= singular_table_name %></Link>
         {" | "}
-        <Link href="/<%= plural_table_name %>">Back to <%= h.changeCase.lower(plural_table_name) %></Link>
+        <Link href="/<%= plural_table_name %>">Back to <%= plural_table_name %></Link>
       </div>
     </>
   );

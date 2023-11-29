@@ -6,41 +6,37 @@ import { useRouter } from "next/router";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { api } from "@/services";
-import <%= class_name %>Form from "@/components/<%= class_name %>Form";
+import { FormProvider } from "@/providers";
+import <%= class_name %>Form, { resolver } from "@/components/<%= class_name %>Form";
 
 export default function <%= class_name %>NewPage() {
   const router = useRouter();
   const queryClient = useQueryClient();
-  const { isPending: isCreating, mutate } = useMutation({
-    mutationFn: (data) => {
-      return api.post("/<%= plural_table_name %>", data);
+
+  const { isPending: isCreating, mutateAsync } = useMutation({
+    mutationFn: (data) => api.post("/<%= plural_table_name %>", data),
+    onSuccess: ({ data }) => {
+      queryClient.invalidateQueries({ queryKey: ["<%= plural_table_name %>"] });
+      router.push({
+        pathname: `/<%= plural_table_name %>/${data.id}`,
+        query: { notice: "Created with success." },
+      });
     },
   });
-
-  const handleCreate = (data) => {
-    mutate(data, {
-      onSuccess: ({ data: <%= singular_table_name %> }) => {
-        queryClient.invalidateQueries({ queryKey: ["<%= plural_table_name %>"] });
-        router.replace({
-          pathname: `/<%= plural_table_name %>/${<%= singular_table_name %>.id}`,
-          query: { notice: "Created with success." },
-        });
-      },
-      onError: (error) => {
-        alert(`Error: ${JSON.stringify(error)}`);
-      },
-    });
-  };
 
   return (
     <>
       <h1>New <%= h.changeCase.lower(human_name) %></h1>
 
-      <<%= class_name %>Form
-        isLoading={isCreating}
-        data={{}}
-        onSubmit={handleCreate}
-      />
+      <FormProvider resolver={resolver} values={{}} onSubmit={mutateAsync}>
+        <<%= class_name %>Form />
+
+        <div>
+          <button disabled={isCreating} type="submit">
+            Create
+          </button>
+        </div>
+      </FormProvider>
 
       <br />
 

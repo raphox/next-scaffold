@@ -16,52 +16,40 @@ export default function <%= class_name %>ShowPage() {
   const notice = searchParams.get("notice");
   const <%= singular_table_name %>Id = params?.id;
 
-  const {
-    isPending,
-    error,
-    data: <%= singular_table_name %>,
-  } = useQuery({
-    queryKey: ["<%= plural_table_name %>", <%= singular_table_name %>Id],
-    queryFn: () => api.get(`/<%= plural_table_name %>/${params.id}`).then((res) => res.data),
-    enabled: !!<%= singular_table_name %>Id,
-  });
-
   const { isPending: isDeleting, mutate } = useMutation({
-    mutationFn: (id) => {
-      return api.delete(`/<%= plural_table_name %>/${id}`);
+    mutationFn: (data) => api.delete(`/<%= plural_table_name %>/${<%= singular_table_name %>Id}`, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["<%= plural_table_name %>"] });
+      router.replace({
+        pathname: "/<%= plural_table_name %>",
+        query: { notice: "Removed with success." },
+      });
     },
   });
 
-  const handleDelete = () => {
-    mutate(params.id, {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["<%= plural_table_name %>"] });
-        router.replace({
-          pathname: "/<%= plural_table_name %>",
-          query: { notice: "Removed with success." },
-        });
-      },
-      onError: (error) => {
-        alert(`Error: ${JSON.stringify(error)}`);
-      },
-    });
-  };
+  const { isPending, error, data } = useQuery({
+    queryFn: () => api.get(`/<%= plural_table_name %>/${<%= singular_table_name %>Id}`).then((res) => res.data),
+    queryKey: ["<%= plural_table_name %>", <%= singular_table_name %>Id],
+    enabled: !!<%= singular_table_name %>Id,
+  });
 
-  if (isPending) return "Loading...";
-
-  if (error) return "An error has occurred: " + error.message;
+  if (isPending) {
+    return "Loading...";
+  } else if (error) {
+    return "An error has occurred: " + error.message;
+  }
 
   return (
     <>
       {notice && <p style={{ color: "green" }}>{notice}</p>}
 
-      <<%= class_name %> {...<%= singular_table_name %>} />
+      <<%= class_name %> {...data} />
 
       <div>
-        <Link href={`/<%= plural_table_name %>/${<%= singular_table_name %>.id}/edit`}>Edit this <%= h.changeCase.lower(human_name) %></Link>
+        <Link href={`/<%= plural_table_name %>/${<%= singular_table_name %>Id}/edit`}>Edit this <%= h.changeCase.lower(human_name) %></Link>
         {" | "}
         <Link href="/<%= plural_table_name %>">Back to <%= h.changeCase.lower(plural_table_name) %></Link>{" "}
-        <button data={{ isLoading: isDeleting }} onClick={handleDelete}>
+        <button disabled={isDeleting} onClick={mutate}>
           Destroy this <%= h.changeCase.lower(human_name) %>
         </button>
       </div>

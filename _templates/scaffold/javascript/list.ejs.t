@@ -11,18 +11,17 @@ import <%= class_name %> from "@/components/<%= class_name %>";
 export default function <%= class_name %>Page() {
   const searchParams = useSearchParams();
   const notice = searchParams.get("notice");
-  const {
-    isPending,
-    error,
-    data: <%= plural_table_name %>,
-  } = useQuery({
-    queryKey: ["<%= plural_table_name %>"],
+
+  const { isPending, error, data } = useQuery({
     queryFn: () => api.get("/<%= plural_table_name %>").then((res) => res.data),
+    queryKey: ["<%= plural_table_name %>"],
   });
 
-  if (isPending) return "Loading...";
-
-  if (error) return "An error has occurred: " + error.message;
+  if (isPending) {
+    return "Loading...";
+  } else if (error) {
+    return "An error has occurred: " + error.message;
+  }
 
   return (
     <>
@@ -31,7 +30,7 @@ export default function <%= class_name %>Page() {
       <h1><%= h.inflection.pluralize(human_name) %></h1>
 
       <div id="<%= plural_table_name %>">
-        {<%= plural_table_name %>.map((<%= singular_table_name %>) => (
+        {data.map((<%= singular_table_name %>) => (
           <div key={<%= singular_table_name %>.id} id={`<%= singular_table_name %>_${<%= singular_table_name %>.id}`}>
             <<%= class_name %> {...<%= singular_table_name %>} />
             <p>

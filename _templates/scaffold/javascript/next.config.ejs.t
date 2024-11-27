@@ -1,6 +1,6 @@
 ---
 inject: true
-to: next.config.js
+to: next.config.mjs
 after: "nextConfig = {"
 skip_if: distDir
 ---

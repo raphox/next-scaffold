@@ -45,7 +45,7 @@ _templates/scaffold/
 ```
 yarn install
 npx hygen-add next-rails-scaffold
-npx hygen generator scaffold post title:string body:text
+npx hygen scaffold javascript post title:string body:text
 ```
 
 ### Result

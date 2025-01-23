@@ -6,8 +6,7 @@ if [ ! -e "$file_path" ]; then
   rm -rf src/pages/api src/styles
 
   echo "Installing dependencies..."
-  yarn add @hookform/resolvers @tanstack/react-query axios react-hook-form zod
-  yarn add --dev @tanstack/react-query-devtools
+  yarn add @hookform/resolvers @tanstack/react-query @tanstack/react-query-devtools axios react-hook-form zod
 
   mv $file_path.lock $file_path
 else

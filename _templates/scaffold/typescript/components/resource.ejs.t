@@ -10,6 +10,7 @@ _%>
 import React from "react";
 
 export interface Props {
+  id: string;
   <%_ Object.entries(resource_attrs).forEach(function([attribute, type]) { _%>
   <%- attribute %>: <%= INTERFACE_TYPE_MAP[type] || 'string' %>;
   <%_ }) _%>

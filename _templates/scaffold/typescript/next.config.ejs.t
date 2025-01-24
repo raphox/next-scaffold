@@ -1,7 +1,7 @@
 ---
 inject: true
-to: next.config.mjs
-after: "nextConfig = {"
+to: next.config.ts
+after: "nextConfig"
 skip_if: distDir
 ---
   output: "export",

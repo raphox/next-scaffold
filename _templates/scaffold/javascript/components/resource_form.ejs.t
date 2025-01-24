@@ -13,7 +13,7 @@ import * as z from "zod";
 
 const schema = z.object({
   <%_ Object.entries(resource_attrs).forEach(function([attribute, type]) { _%>
-  <%= attribute %>: z.<%= ZOD_TYPE_MAP[type] || 'string' %>(),
+  <%- attribute %>: z.<%= ZOD_TYPE_MAP[type] || 'string' %>(),
   <%_ }) _%>
 });
 

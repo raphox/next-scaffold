@@ -4,7 +4,8 @@ to: src/pages/<%= h.inflection.tableize(name) %>/[id]/index.tsx
 import React from "react";
 
 import Link from "next/link";
-import { useRouter, useParams, useSearchParams } from "next/navigation";
+import { useRouter } from 'next/router'
+import { useParams, useSearchParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { api } from "@/services";
@@ -51,7 +52,7 @@ export default function <%= class_name %>ShowPage() {
         <Link href={`/<%= plural_table_name %>/${<%= singular_table_name %>Id}/edit`}>Edit this <%= h.changeCase.lower(human_name) %></Link>
         {" | "}
         <Link href="/<%= plural_table_name %>">Back to <%= h.changeCase.lower(plural_table_name) %></Link>{" "}
-        <button disabled={isDeleting} onClick={() => mutate()}>
+        <button disabled={isDeleting} onClick={() => mutate(<%= singular_table_name %>Id)}>
           Destroy this <%= h.changeCase.lower(human_name) %>
         </button>
       </div>

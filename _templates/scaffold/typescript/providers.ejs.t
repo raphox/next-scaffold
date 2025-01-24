@@ -25,7 +25,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   );
 }
 
-import axios from "axios";
+import { AxiosResponse } from "axios";
 import {
   useForm,
   FormProvider as FormProviderBase,
@@ -38,7 +38,7 @@ interface FormProviderProps {
   children: ReactNode;
   values: FieldValues;
   resolver: Resolver;
-  onSubmit: UseMutateAsyncFunction<axios.AxiosResponse<any, any>, Error, any, unknown>;
+  onSubmit: UseMutateAsyncFunction<AxiosResponse<any, any>, Error, any, unknown>;
 }
 
 export function FormProvider({ children, values, resolver, onSubmit }: FormProviderProps) {

@@ -8,7 +8,7 @@ import { useSearchParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 
 import { api } from "@/services";
-import <%= class_name %> from "@/components/<%= class_name %>";
+import <%= class_name %>, { Props as <%= class_name %>Props } from "@/components/<%= class_name %>";
 
 export default function <%= class_name %>Page() {
   const searchParams = useSearchParams();
@@ -32,7 +32,7 @@ export default function <%= class_name %>Page() {
       <h1><%= h.inflection.pluralize(human_name) %></h1>
 
       <div id="<%= plural_table_name %>">
-        {data.map((<%= singular_table_name %>) => (
+        {data.map((<%= singular_table_name %>: <%= class_name %>Props) => (
           <div key={<%= singular_table_name %>.id} id={`<%= singular_table_name %>_${<%= singular_table_name %>.id}`}>
             <<%= class_name %> {...<%= singular_table_name %>} />
             <p>

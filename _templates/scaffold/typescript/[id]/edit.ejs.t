@@ -11,12 +11,8 @@ import { api } from "@/services";
 import { FormProvider } from "@/providers";
 import <%= class_name %>Form, { resolver } from "@/components/<%= class_name %>Form";
 
-interface Params {
-  id: string;
-}
-
 export default function <%= class_name %>EditPage() {
-  const params = useParams<Params>();
+  const params = useParams();
   const queryClient = useQueryClient();
   const <%= singular_table_name %>Id = params?.id;
 

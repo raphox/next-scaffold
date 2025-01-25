@@ -1,10 +1,11 @@
 ---
 inject: true
 to: eslint.config.mjs
-after: 'eslintConfig'
+after: '...compat.extends'
+prepend: true
 skip_if: rules
 ---
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
+,
   {
     rules: {
       "react-hooks/exhaustive-deps": "warn",

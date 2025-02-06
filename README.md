@@ -64,7 +64,7 @@ _templates/scaffold/
 ```
 yarn install
 npx hygen-add next-scaffold
-npx hygen scaffold javascript post title:string body:text
+npx hygen scaffold typescript post title:string body:text
 ```
 
 ### Result
@@ -74,16 +74,20 @@ Generated files strutucture:
 ```
 src
 ├── components
-|   ├── Post.js
-|   └── PostForm.js
+|   ├── Post.tsx
+|   └── PostForm.tsx
 ├── pages
 |   └── posts
 |       ├── [id]
-|       |   ├── edit.js
-|       |   └── index.js
-|       ├── index.js
-|       └── new.js
-└── services.js
+|       |   ├── edit.tsx
+|       |   └── index.tsx
+|       ├── index.tsx
+|       └── new.tsx
+├── _app.tsx
+├── _document.tsx
+├── index.tsx
+├── providers.tsx
+└── services.ts
 ```
 
 Sample app https://github.com/raphox/next-rails-app.

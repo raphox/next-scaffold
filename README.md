@@ -18,12 +18,29 @@ _templates/scaffold/
     ├── components
     |   ├── resource.ejs.t
     |   └── resource_form.ejs.t
-    ├── home.js
+    ├── _app.ejs.t
+    ├── _document.ejs.t
+    ├── home.ejs.t
     ├── index.js
     ├── list.ejs.t
     ├── new.ejs.t
+    ├── providers.ejs.t
     └── services.ejs.t
-├── typescript (TODO)
+├── typescript
+    ├── [id]
+    |   ├── edit.ejs.t
+    |   └── show.ejs.t
+    ├── components
+    |   ├── resource.ejs.t
+    |   └── resource_form.ejs.t
+    ├── _app.ejs.t
+    ├── _document.ejs.t
+    ├── home.ejs.t
+    ├── index.js
+    ├── list.ejs.t
+    ├── new.ejs.t
+    ├── providers.ejs.t
+    ├── services.ejs.t
 └── shadcn-ui (TODO)
 ```
 
